@@ -1,104 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GestorSystem - Software como Servicio</title>
+  <meta charset="UTF-8">
+  <title>GestorSystem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background: #f4f4f4;
+      font-family: Arial, sans-serif;
     }
 
+    /* Barra superior */
     #topbar {
-      background: #0d47a1;
+      background-color: #0d47a1;
       color: white;
-      font-size: 14px;
-      padding: 8px 20px;
+      padding: 5px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 14px;
     }
 
-    #topbar .ventas {
-      font-weight: bold;
-    }
-
-    #topbar .ingresar a {
-      background: white;
+    #topbar .ingresar {
+      background-color: white;
       color: #0d47a1;
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 5px 10px;
       text-decoration: none;
+      border-radius: 4px;
       font-weight: bold;
     }
 
+    /* Encabezado */
     header {
-      background: #0d47a1;
-      color: white;
-      padding: 10px 0 5px;
+      background-color: #f5f5f5;
       text-align: center;
+      padding: 30px 20px 10px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5em;
+      font-size: 32px;
+      color: #0d47a1;
     }
 
     header p {
-      margin: 5px 0 10px;
-      font-size: 1.2em;
+      margin: 5px 0 20px;
+      font-size: 18px;
+      color: #333;
     }
 
+    /* Navegación */
     nav {
-      background: #1565c0;
-      text-align: center;
-      padding: 8px 0;
+      background-color: #1976d2;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     nav a {
+      padding: 12px 18px;
       color: white;
-      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
+      transition: background-color 0.3s;
     }
 
+    nav a:hover {
+      background-color: #1565c0;
+    }
+
+    /* Secciones */
     section {
       padding: 40px 20px;
       max-width: 1000px;
       margin: auto;
-      background: white;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    h2 {
+    section h2 {
       color: #0d47a1;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    footer {
-      background: #0d47a1;
-      color: white;
+    /* Icono volver */
+    .volver {
       text-align: center;
-      padding: 20px;
+      margin-top: 20px;
     }
 
     .icon-button {
-      font-size: 28px;
+      font-size: 24px;
       text-decoration: none;
       color: #0d47a1;
-      display: inline-block;
-      margin-top: 20px;
       transition: transform 0.2s;
     }
 
@@ -107,44 +100,43 @@
       color: #1565c0;
     }
 
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
 
-    form button {
-      background: #0d47a1;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+      #topbar {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+      }
 
-    form button:hover {
-      background: #1565c0;
-    }
+      header h1 {
+        font-size: 26px;
+      }
 
-    .volver {
-      text-align: center;
+      header p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Top Bar -->
   <div id="topbar">
-    <div class="ventas">Ventas: 982065304 / 908505524</div>
-    <div class="ingresar"><a href="login.html">INGRESAR</a></div>
+    <div>Ventas: 982065304 / 908505524</div>
+    <a href="login.html" class="ingresar">INGRESAR</a>
   </div>
 
+  <!-- Header -->
   <header>
     <h1>GestorSystem</h1>
     <p>Software como Servicio para tu Negocio</p>
   </header>
 
+  <!-- Navigation Menu -->
   <nav>
     <a href="#beneficios">Beneficios</a>
     <a href="#soluciones">Soluciones</a>
@@ -153,93 +145,60 @@
     <a href="#contacto">Contáctenos</a>
   </nav>
 
+  <!-- Beneficios -->
   <section id="beneficios">
     <h2>Beneficios</h2>
-    <ul>
-      <li>Acceso desde cualquier lugar 24/7</li>
-      <li>Actualizaciones automáticas y soporte continuo</li>
-      <li>Interfaz amigable y adaptable a tu rubro</li>
-      <li>Mejora la eficiencia y control de tu negocio</li>
-      <li>Seguridad y respaldo diario de tus datos</li>
-    </ul>
-    <div class="volver"><a class="icon-button" href="#topbar" title="Volver al menú principal">🏠</a></div>
-  </section>
-
-  <section id="soluciones">
-    <h2>Soluciones por Rubro</h2>
-    <div class="grid">
-      <div><strong>Farmacias:</strong><br>Sistema de stock, recetas, Kardex y control de lotes.</div>
-      <div><strong>Ferreterías:</strong><br>Inventario, ventas, compras y clientes frecuentes.</div>
-      <div><strong>Restaurantes:</strong><br>Comandas, mesas, delivery, recetas y reportes.</div>
-      <div><strong>Colegios:</strong><br>Matrículas, notas, pagos y comunicación con padres.</div>
-      <div><strong>Hoteles:</strong><br>Reservas, habitaciones, limpieza, y facturación.</div>
-      <div><strong>Clínicas:</strong><br>Historias clínicas, turnos, recetas, facturación electrónica.</div>
+    <p>Ofrecemos disponibilidad 24/7, actualizaciones automáticas, soporte técnico rápido y acceso desde cualquier dispositivo con conexión a Internet.</p>
+    <div class="volver">
+      <a class="icon-button" href="#topbar" title="Volver al inicio">
+        <i class="fa fa-chevron-up"></i>
+      </a>
     </div>
-    <div class="volver"><a class="icon-button" href="#topbar" title="Volver al menú principal">🏠</a></div>
   </section>
 
+  <!-- Soluciones -->
+  <section id="soluciones">
+    <h2>Soluciones</h2>
+    <p>Tenemos soluciones personalizadas para farmacias, ferreterías, restaurantes, colegios, hoteles, clínicas y más. Cada sistema incluye módulos de ventas, inventario, reportes y facturación electrónica.</p>
+    <div class="volver">
+      <a class="icon-button" href="#topbar" title="Volver al inicio">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Precios -->
   <section id="precios">
     <h2>Precios</h2>
-    <div class="grid">
-      <div>
-        <h3>Básico</h3>
-        <p>S/ 99/mes</p>
-        <p>Ideal para pequeños negocios.</p>
-      </div>
-      <div>
-        <h3>Profesional</h3>
-        <p>S/ 199/mes</p>
-        <p>Para negocios en crecimiento.</p>
-      </div>
-      <div>
-        <h3>Empresarial</h3>
-        <p>Desde S/ 299/mes</p>
-        <p>Soluciones personalizadas y soporte dedicado.</p>
-      </div>
+    <p>Planes desde S/ 49 al mes. Sin contratos largos. Prueba gratuita disponible. Tarifas especiales por volumen o instituciones educativas.</p>
+    <div class="volver">
+      <a class="icon-button" href="#topbar" title="Volver al inicio">
+        <i class="fa fa-chevron-up"></i>
+      </a>
     </div>
-    <div class="volver"><a class="icon-button" href="#topbar" title="Volver al menú principal">🏠</a></div>
   </section>
 
+  <!-- Clientes -->
   <section id="clientes">
     <h2>Clientes</h2>
-    <p>Confían en nosotros más de 100 negocios en Perú:</p>
-    <ul>
-      <li>Boticas FarmaSalud - Huacho</li>
-      <li>Ferretería El Constructor - Barranca</li>
-      <li>Restaurante Las Delicias - Huaral</li>
-      <li>Colegio San Martín - Lima</li>
-      <li>Hotel Sol y Playa - Chimbote</li>
-      <li>Clínica San Juan - Cañete</li>
-    </ul>
-    <div class="volver"><a class="icon-button" href="#topbar" title="Volver al menú principal">🏠</a></div>
+    <p>Más de 300 negocios en todo el Perú confían en GestorSystem. Testimonios disponibles bajo solicitud.</p>
+    <div class="volver">
+      <a class="icon-button" href="#topbar" title="Volver al inicio">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
   </section>
 
+  <!-- Contacto -->
   <section id="contacto">
     <h2>Contáctenos</h2>
-    <p>¿Interesado en una demo gratuita? Escríbenos:</p>
-    <form onsubmit="return enviarFormulario();">
-      <label>Nombre:</label>
-      <input type="text" name="nombre" required />
-      <label>Correo:</label>
-      <input type="email" name="correo" required />
-      <label>Mensaje:</label>
-      <textarea name="mensaje" rows="4" required></textarea>
-      <button type="submit">Enviar Mensaje</button>
-    </form>
-    <p>O llámanos al: <strong>+51 982065304</strong></p>
-    <div class="volver"><a class="icon-button" href="#topbar" title="Volver al menú principal">🏠</a></div>
+    <p>¿Deseas una demo? Escríbenos por WhatsApp al 982065304 o al 908505524. También puedes enviar un correo a info@gestorsystem.com.</p>
+    <div class="volver">
+      <a class="icon-button" href="#topbar" title="Volver al inicio">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
   </section>
-
-  <footer>
-    &copy; 2025 GestorSystem EIRL - Todos los derechos reservados.
-  </footer>
-
-  <script>
-    function enviarFormulario() {
-      alert("Gracias por contactarnos. Nos comunicaremos contigo pronto.");
-      return false; // evitar recarga
-    }
-  </script>
 
 </body>
 </html>
