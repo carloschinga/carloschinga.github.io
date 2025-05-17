@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>GestorSystem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
   <style>
     :root {
       --azul-principal: #0d47a1;
@@ -69,11 +72,19 @@
       background-color: var(--azul-menu);
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap; /* sin quiebre */
       padding: 5px 0;
       position: sticky;
       top: 95px;
       z-index: 998;
+
+      overflow-x: auto; /* permite scroll horizontal */
+      -webkit-overflow-scrolling: touch; /* scroll suave iOS */
+      scrollbar-width: none; /* oculta scrollbar Firefox */
+    }
+
+    nav::-webkit-scrollbar {
+      display: none; /* oculta scrollbar Chrome, Safari, Opera */
     }
 
     nav a {
@@ -82,6 +93,7 @@
       text-decoration: none;
       font-weight: bold;
       transition: background-color 0.3s;
+      white-space: nowrap; /* evita quiebre de texto */
     }
 
     nav a:hover {
@@ -119,8 +131,7 @@
     /* Responsive */
     @media (max-width: 768px) {
       nav {
-        flex-direction: column;
-        align-items: center;
+        /* Mantener scroll horizontal en móvil, no cambiar flex-direction */
       }
 
       #topbar {
@@ -138,14 +149,12 @@
       }
 
       nav a {
-        width: 100%;
-        text-align: center;
+        /* Que los enlaces sigan sin quiebre y scroll horizontal */
       }
     }
   </style>
 </head>
 <body>
-
   <!-- Top Bar -->
   <div id="topbar">
     <div>Ventas: 982065304 / 908505524</div>
@@ -170,43 +179,67 @@
   <!-- Secciones -->
   <section id="beneficios">
     <h2>Beneficios</h2>
-    <p>Ofrecemos disponibilidad 24/7, actualizaciones automáticas, soporte técnico rápido y acceso desde cualquier dispositivo con conexión a Internet.</p>
+    <p>
+      Ofrecemos disponibilidad 24/7, actualizaciones automáticas, soporte técnico rápido y acceso desde cualquier dispositivo con conexión a Internet.
+    </p>
     <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"><i class="fa fa-chevron-up"></i></a>
+      <a class="icon-button" href="#topbar" title="Volver al inicio"
+        ><i class="fa fa-chevron-up"></i
+      ></a>
     </div>
   </section>
 
   <section id="soluciones">
     <h2>Soluciones</h2>
-    <p>Tenemos soluciones personalizadas para farmacias, ferreterías, restaurantes, colegios, hoteles, clínicas y más. Cada sistema incluye módulos de ventas, inventario, reportes y facturación electrónica.</p>
+    <p>
+      Tenemos soluciones personalizadas para farmacias, ferreterías,
+      restaurantes, colegios, hoteles, clínicas y más. Cada sistema incluye
+      módulos de ventas, inventario, reportes y facturación electrónica.
+    </p>
     <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"><i class="fa fa-chevron-up"></i></a>
+      <a class="icon-button" href="#topbar" title="Volver al inicio"
+        ><i class="fa fa-chevron-up"></i
+      ></a>
     </div>
   </section>
 
   <section id="precios">
     <h2>Precios</h2>
-    <p>Planes desde S/ 49 al mes. Sin contratos largos. Prueba gratuita disponible. Tarifas especiales por volumen o instituciones educativas.</p>
+    <p>
+      Planes desde S/ 49 al mes. Sin contratos largos. Prueba gratuita
+      disponible. Tarifas especiales por volumen o instituciones educativas.
+    </p>
     <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"><i class="fa fa-chevron-up"></i></a>
+      <a class="icon-button" href="#topbar" title="Volver al inicio"
+        ><i class="fa fa-chevron-up"></i
+      ></a>
     </div>
   </section>
 
   <section id="clientes">
     <h2>Clientes</h2>
-    <p>Más de 300 negocios en todo el Perú confían en GestorSystem. Testimonios disponibles bajo solicitud.</p>
+    <p>
+      Más de 300 negocios en todo el Perú confían en GestorSystem.
+      Testimonios disponibles bajo solicitud.
+    </p>
     <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"><i class="fa fa-chevron-up"></i></a>
+      <a class="icon-button" href="#topbar" title="Volver al inicio"
+        ><i class="fa fa-chevron-up"></i
+      ></a>
     </div>
   </section>
 
   <section id="contacto">
     <h2>Contáctenos</h2>
-    <p>¿Deseas una demo? Escríbenos por WhatsApp al 982065304 o al 908505524. También puedes enviar un correo a info@gestorsystem.com.</p>
+    <p>
+      ¿Deseas una demo? Escríbenos por WhatsApp al 982065304 o al 908505524.
+      También puedes enviar un correo a info@gestorsystem.com.
+    </p>
     <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"><i class="fa fa-chevron-up"></i></a>
+      <a class="icon-button" href="#topbar" title="Volver al inicio"
+        ><i class="fa fa-chevron-up"></i
+      ></a>
     </div>
   </section>
-
 </body>
 </html>
