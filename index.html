@@ -6,6 +6,24 @@
   <title>GestorSystem - Software como Servicio</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f4f4f4; }
+    #topbar {
+      background: #263238;
+      color: white;
+      font-size: 14px;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #topbar .ventas { font-weight: bold; }
+    #topbar .ingresar a {
+      background: #ffca28;
+      color: black;
+      padding: 6px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+    }
     header { background: #0d47a1; color: white; padding: 20px 0; text-align: center; }
     nav { background: #1565c0; text-align: center; padding: 10px 0; }
     nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
@@ -17,6 +35,11 @@
   </style>
 </head>
 <body>
+
+<div id="topbar">
+  <div class="ventas">Ventas: 955 114 219 / 960 466 647</div>
+  <div class="ingresar"><a href="login.html">INGRESAR</a></div>
+</div>
 
 <header>
   <h1>GestorSystem</h1>
