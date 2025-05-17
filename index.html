@@ -1,5 +1,111 @@
-hola mundo
-soy Carlos Chinga
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GestorSystem - Software como Servicio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f4f4f4; }
+    header { background: #0d47a1; color: white; padding: 20px 0; text-align: center; }
+    nav { background: #1565c0; text-align: center; padding: 10px 0; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; background: white; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h2 { color: #0d47a1; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    footer { background: #0d47a1; color: white; text-align: center; padding: 20px; }
+    .button { background: #0d47a1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px; }
+  </style>
+</head>
+<body>
 
-soy lo maximo
-ppppppp
+<header>
+  <h1>GestorSystem</h1>
+  <p>Software como Servicio para tu Negocio</p>
+</header>
+
+<nav>
+  <a href="#beneficios">Beneficios</a>
+  <a href="#soluciones">Soluciones</a>
+  <a href="#precios">Precios</a>
+  <a href="#clientes">Clientes</a>
+  <a href="#contacto">Contáctenos</a>
+</nav>
+
+<section id="beneficios">
+  <h2>Beneficios</h2>
+  <ul>
+    <li>Acceso desde cualquier lugar 24/7</li>
+    <li>Actualizaciones automáticas y soporte continuo</li>
+    <li>Interfaz amigable y adaptable a tu rubro</li>
+    <li>Mejora la eficiencia y control de tu negocio</li>
+    <li>Seguridad y respaldo diario de tus datos</li>
+  </ul>
+</section>
+
+<section id="soluciones">
+  <h2>Soluciones por Rubro</h2>
+  <div class="grid">
+    <div><strong>Farmacias:</strong><br>Sistema de stock, recetas, Kardex y control de lotes.</div>
+    <div><strong>Ferreterías:</strong><br>Inventario, ventas, compras y clientes frecuentes.</div>
+    <div><strong>Restaurantes:</strong><br>Comandas, mesas, delivery, recetas y reportes.</div>
+    <div><strong>Colegios:</strong><br>Matrículas, notas, pagos y comunicación con padres.</div>
+    <div><strong>Hoteles:</strong><br>Reservas, habitaciones, limpieza, y facturación.</div>
+    <div><strong>Clínicas:</strong><br>Historias clínicas, turnos, recetas, facturación electrónica.</div>
+  </div>
+</section>
+
+<section id="precios">
+  <h2>Precios</h2>
+  <div class="grid">
+    <div>
+      <h3>Básico</h3>
+      <p>S/ 99/mes</p>
+      <p>Ideal para pequeños negocios.</p>
+    </div>
+    <div>
+      <h3>Profesional</h3>
+      <p>S/ 199/mes</p>
+      <p>Para negocios en crecimiento.</p>
+    </div>
+    <div>
+      <h3>Empresarial</h3>
+      <p>Desde S/ 299/mes</p>
+      <p>Soluciones personalizadas y soporte dedicado.</p>
+    </div>
+  </div>
+</section>
+
+<section id="clientes">
+  <h2>Clientes</h2>
+  <p>Confían en nosotros más de 100 negocios en Perú:</p>
+  <ul>
+    <li>Boticas FarmaSalud - Huacho</li>
+    <li>Ferretería El Constructor - Barranca</li>
+    <li>Restaurante Las Delicias - Huaral</li>
+    <li>Colegio San Martín - Lima</li>
+    <li>Hotel Sol y Playa - Chimbote</li>
+    <li>Clínica San Juan - Cañete</li>
+  </ul>
+</section>
+
+<section id="contacto">
+  <h2>Contáctenos</h2>
+  <p>¿Interesado en una demo gratuita? Escríbenos:</p>
+  <form>
+    <label>Nombre:</label><br>
+    <input type="text" name="nombre" required><br><br>
+    <label>Correo:</label><br>
+    <input type="email" name="correo" required><br><br>
+    <label>Mensaje:</label><br>
+    <textarea name="mensaje" rows="4" required></textarea><br><br>
+    <button type="submit" class="button">Enviar Mensaje</button>
+  </form>
+  <p>O llámanos al: <strong>+51 987 654 321</strong></p>
+</section>
+
+<footer>
+  &copy; 2025 GestorSystem EIRL - Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
