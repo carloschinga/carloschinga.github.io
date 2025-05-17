@@ -30,7 +30,7 @@
       font-size: 14px;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 1000;
     }
 
     #topbar .ingresar {
@@ -49,7 +49,7 @@
       padding: 15px 10px;
       position: sticky;
       top: 35px;
-      z-index: 998;
+      z-index: 999;
     }
 
     header h1 {
@@ -64,12 +64,16 @@
       color: #333;
     }
 
+    /* Menú de navegación fijo debajo del header */
     nav {
       background-color: var(--azul-menu);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       padding: 5px 0;
+      position: sticky;
+      top: 95px;
+      z-index: 998;
     }
 
     nav a {
@@ -206,4 +210,3 @@
 
 </body>
 </html>
-
