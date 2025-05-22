@@ -2,244 +2,77 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>GestorSystem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestor - Iniciar Sesión</title>
   <style>
-    :root {
-      --azul-principal: #0d47a1;
-      --azul-menu: #1976d2;
-      --azul-hover: #1565c0;
-      --fondo-seccion: #f9f9f9;
+    * {
+      box-sizing: border-box;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-    }
-
-    /* Topbar fijo */
-    #topbar {
-      background-color: var(--azul-principal);
-      color: white;
-      padding: 6px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    #topbar .ingresar {
-      background-color: white;
-      color: var(--azul-principal);
-      padding: 5px 10px;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-
-    /* Header fijo debajo de topbar */
-    header {
-      background-color: #f5f5f5;
-      text-align: center;
-      padding: 15px 10px;
-      position: sticky;
-      top: 35px;
-      z-index: 999;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 26px;
-      color: var(--azul-principal);
-    }
-
-    header p {
-      margin: 5px 0 0;
-      font-size: 16px;
-      color: #333;
-    }
-
-    /* Menú de navegación fijo debajo del header */
-    nav {
-      background-color: var(--azul-menu);
+      background: #f8f9fa;
       display: flex;
       justify-content: center;
-      flex-wrap: nowrap; /* sin quiebre */
-      padding: 5px 0;
-      position: sticky;
-      top: 95px;
-      z-index: 998;
-
-      overflow-x: auto; /* permite scroll horizontal */
-      -webkit-overflow-scrolling: touch; /* scroll suave iOS */
-      scrollbar-width: none; /* oculta scrollbar Firefox */
+      align-items: center;
+      height: 100vh;
     }
-
-    nav::-webkit-scrollbar {
-      display: none; /* oculta scrollbar Chrome, Safari, Opera */
-    }
-
-    nav a {
-      padding: 10px 16px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s;
-      white-space: nowrap; /* evita quiebre de texto */
-    }
-
-    nav a:hover {
-      background-color: var(--azul-hover);
-    }
-
-    section {
-      padding: 60px 20px 40px;
-      max-width: 1000px;
-      margin: auto;
-      background-color: var(--fondo-seccion);
-    }
-
-    section h2 {
-      color: var(--azul-principal);
-    }
-
-    .volver {
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 360px;
       text-align: center;
-      margin-top: 20px;
     }
-
-    .icon-button {
-      font-size: 24px;
-      text-decoration: none;
-      color: var(--azul-principal);
-      transition: transform 0.2s;
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #3366cc;
+      margin-bottom: 1rem;
     }
-
-    .icon-button:hover {
-      transform: scale(1.2);
-      color: var(--azul-hover);
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
     }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        /* Mantener scroll horizontal en móvil, no cambiar flex-direction */
-      }
-
-      #topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-
-      header h1 {
-        font-size: 22px;
-      }
-
-      header p {
-        font-size: 14px;
-      }
-
-      nav a {
-        /* Que los enlaces sigan sin quiebre y scroll horizontal */
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #3366cc;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #254a9e;
+    }
+    @media (max-width: 400px) {
+      .login-container {
+        margin: 0 1rem;
+        padding: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Top Bar -->
-  <div id="topbar">
-    <div>Ventas: 982065304 / 908505524</div>
-    <a href="login.html" class="ingresar">INGRESAR</a>
+  <div class="login-container">
+    <div class="logo">Gestor</div>
+    <form action="LoginServlet" method="post">
+      <input type="text" name="ruc" placeholder="RUC de empresa" required />
+      <input type="text" name="usuario" placeholder="Usuario" required />
+      <input type="password" name="password" placeholder="Contraseña" required />
+      <button type="submit">Iniciar Sesión</button>
+    </form>
   </div>
-
-  <!-- Header -->
-  <header>
-    <h1>GestorSystem</h1>
-    <p>Software como Servicio para tu Negocio</p>
-  </header>
-
-  <!-- Navigation Menu -->
-  <nav>
-    <a href="#beneficios">Beneficios</a>
-    <a href="#soluciones">Soluciones</a>
-    <a href="#precios">Precios</a>
-    <a href="#clientes">Clientes</a>
-    <a href="#contacto">Contáctenos</a>
-  </nav>
-
-  <!-- Secciones -->
-  <section id="beneficios">
-    <h2>Beneficios</h2>
-    <p>
-      Ofrecemos disponibilidad 24/7, actualizaciones automáticas, soporte técnico rápido y acceso desde cualquier dispositivo con conexión a Internet.
-    </p>
-    <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-  </section>
-
-  <section id="soluciones">
-    <h2>Soluciones</h2>
-    <p>
-      Tenemos soluciones personalizadas para farmacias, ferreterías,
-      restaurantes, colegios, hoteles, clínicas y más. Cada sistema incluye
-      módulos de ventas, inventario, reportes y facturación electrónica.
-    </p>
-    <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-  </section>
-
-  <section id="precios">
-    <h2>Precios</h2>
-    <p>
-      Planes desde S/ 49 al mes. Sin contratos largos. Prueba gratuita
-      disponible. Tarifas especiales por volumen o instituciones educativas.
-    </p>
-    <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-  </section>
-
-  <section id="clientes">
-    <h2>Clientes</h2>
-    <p>
-      Más de 300 negocios en todo el Perú confían en GestorSystem.
-      Testimonios disponibles bajo solicitud.
-    </p>
-    <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-  </section>
-
-  <section id="contacto">
-    <h2>Contáctenos</h2>
-    <p>
-      ¿Deseas una demo? Escríbenos por WhatsApp al 982065304 o al 908505524.
-      También puedes enviar un correo a info@gestorsystem.com.
-    </p>
-    <div class="volver">
-      <a class="icon-button" href="#topbar" title="Volver al inicio"
-        ><i class="fa fa-chevron-up"></i
-      ></a>
-    </div>
-  </section>
 </body>
 </html>
+
