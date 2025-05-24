@@ -86,11 +86,12 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 <script>
   $(document).ready(function () {
+    let endpoint="http://181.224.248.20/GestorFarmacia/"
     // Función para cargar y mostrar los minutos de tolerancia
     function cargarMinutosTolerancia() {
       $.ajax({
         type: "GET",
-        url: "asistenciaparametros",
+        url: endpoint+"asistenciaparametros",
         data: { id: 1 }, // Usamos id=1 para los minutos de tolerancia
         success: function (response) {
           if (response.status === "success") {
@@ -137,7 +138,7 @@
 
       $.ajax({
         type: "PUT",
-        url: "asistenciaparametros",
+        url: endpoint+"asistenciaparametros",
         contentType: "application/json",
         dataType: "json", // Esperamos JSON en la respuesta
         data: JSON.stringify({
@@ -182,7 +183,7 @@
     function cargarEstadoLimitacion() {
       $.ajax({
         type: "GET",
-        url: "asistenciaparametros",
+        url: endpoint+"asistenciaparametros",
         data: { id: 2 }, // ID 2 para limitación de horario
         success: function (response) {
           if (response && response.status === "success") {
@@ -221,7 +222,7 @@
 
       $.ajax({
         type: "PUT",
-        url: "asistenciaparametros",
+        url: endpoint+"asistenciaparametros",
         contentType: "application/json",
         data: JSON.stringify({
           id: 2, // ID 2 para limitación de horario
