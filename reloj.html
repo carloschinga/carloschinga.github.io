@@ -166,7 +166,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es.min.js"></script>
 <script>
-      document.addEventListener("DOMContentLoaded", function () {
+    let endpoint="http://181.224.248.20/GestorFarmacia/";
+    document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".container").style.display = "none";
     document.querySelector(".container2").style.display = "none";
 
@@ -206,7 +207,7 @@
         }
 
         try {
-            const response = await fetch("marcacion", {
+            const response = await fetch(endpoint+"marcacion", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -242,7 +243,7 @@
         }
 
         try {
-            const response = await fetch(`verAsistencias?numeDocu=${encodeURIComponent(numeDocu)}&codiTipoDoc=${encodeURIComponent(tipoDocu)}`);
+            const response = await fetch(endpoint+`verAsistencias?numeDocu=${encodeURIComponent(numeDocu)}&codiTipoDoc=${encodeURIComponent(tipoDocu)}`);
             const data = await response.json();
 
             if (data.status === "success") {
@@ -273,7 +274,7 @@
 
     async function obtenerFechaHora() {
         try {
-            const response = await fetch("getdatetime");
+            const response = await fetch(endpoint+"getdatetime");
             const data = await response.json();
             updateDateTime(data.datetime);
         } catch (error) {
