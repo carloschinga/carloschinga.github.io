@@ -1,0 +1,306 @@
+<style>
+  /* Estilos para el botón toggle */
+  .btn-toggle {
+    min-width: 90px;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #2c3e50;
+    /* Borde azul noche */
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estado OFF (inactivo) */
+  .btn-toggle {
+    background-color: #f8f9fa;
+    color: #7f8c8d;
+    /* Gris azulado */
+  }
+
+  /* Estado ON (activo) - Azul noche */
+  .btn-toggle.active {
+    background-color: #2c3e50;
+    /* Azul noche */
+    color: white;
+    border-color: #1a252f;
+    /* Azul noche más oscuro */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Efecto hover para coincidir con el estilo */
+  .btn-toggle:hover:not(.active) {
+    background-color: #ecf0f1;
+    color: #34495e;
+    /* Azul noche más claro */
+  }
+
+  /* Efecto hover cuando está activo */
+  .btn-toggle.active:hover {
+    background-color: #1a252f;
+    /* Azul noche más oscuro */
+    border-color: #1a252f;
+  }
+
+  /* Icono/texto interior */
+  .toggle-icon {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+</style>
+
+<div class="container mt-4">
+  <div class="row">
+    <!-- Primer Card: Opciones de Marcación -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="h5 mb-0 text-gray-800">Opciones de Marcación</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary btn-sm" id="btnCrear">
+              <i class="fas fa-fw fa-plus"></i>
+              <span>Agregar Marcador a PC</span>
+            </button>
+            <button class="btn btn-primary btn-sm" id="btnQuitar">
+              <i class="fas fa-fw fa-minus"></i>
+              <span>Quitar Marcador de PC</span>
+            </button>
+          </div>
+          <hr />
+          <div id="alertaCreacion" class="alert alert-success alert-dismissible fade show" role="alert"
+            style="display: none">
+            ¡La cookie ha sido creada correctamente!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="alertaEliminacion" class="alert alert-warning alert-dismissible fade show" role="alert"
+            style="display: none">
+            ¡La cookie ha sido eliminada!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segundo Card: Minutos de Marcación -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="h5 mb-0 text-gray-800">Minutos de Tolerancia</h5>
+        </div>
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-6">
+              Tolerancia en minutos:
+            </div>
+            <div class="col-6">
+              <div class="input-group">
+                <input type="text" id="minMarcaEdit" class="form-control form-control-sm" />
+                <div class="input-group-append">
+                  <button type="button" id="editMin" class="btn btn-info btn-sm">
+                    Editar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Caja de Limitar Horario -->
+      <div class="card mt-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="h5 mb-0">Modo de Marcación</h5>
+          <button type="button" id="toggleLimitacion" class="btn btn-toggle">
+            <span class="toggle-icon">OFF</span>
+          </button>
+        </div>
+        <div class="card-body">
+          <p class="card-text text-muted">
+            <strong>ON:</strong> Con validaciones de horario<br>
+            <strong>OFF:</strong> Sin validaciones de horario
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Función para cargar y mostrar los minutos de tolerancia
+    function cargarMinutosTolerancia() {
+      $.ajax({
+        type: "GET",
+        url: "asistenciaparametros",
+        data: { id: 1 }, // Usamos id=1 para los minutos de tolerancia
+        success: function (response) {
+          if (response.status === "success") {
+            const minutos = response.valor;
+            $("#minMarca").text(minutos);
+            $("#minMarcaEdit").val(minutos);
+          } else {
+            console.error("Error al cargar minutos:", response.message);
+            $("#minMarca").text("Error al cargar");
+          }
+        },
+        error: function (xhr) {
+          console.error("Error en la solicitud:", xhr.responseText);
+          $("#minMarca").text("Error de conexión");
+        }
+      });
+    }
+
+    // Llamar a la función al cargar la página
+    cargarMinutosTolerancia();
+
+    // Función para mostrar notificaciones
+    function mostrarAlerta(mensaje, icono) {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: icono,
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: { popup: "swal2-sm" },
+      });
+    }
+
+    // Manejar edición de minutos
+    $("#editMin").click(function () {
+      const minutos = $("#minMarcaEdit").val();
+      // Validación mejorada
+      if (!minutos || !/^\d+$/.test(minutos)) {
+        mostrarAlerta("Ingrese un valor numérico entero válido", "error");
+        return;
+      }
+
+      $.ajax({
+        type: "PUT",
+        url: "asistenciaparametros",
+        contentType: "application/json",
+        dataType: "json", // Esperamos JSON en la respuesta
+        data: JSON.stringify({
+          id: 1,
+          minutos: minutos // Cambié 'valor' a 'minutos' para coincidir con tu servlet
+        }),
+        success: function (response) {
+          if (response && response.status === "success") {
+            mostrarAlerta(response.message || "Actualización exitosa", "success");
+            cargarMinutosTolerancia();
+            $("#minMarcaEdit").val("");
+          } else {
+            mostrarAlerta(response?.message || "Error desconocido", "error");
+          }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          mostrarAlerta(response.message || "Actualización exitosa", "success");
+          cargarMinutosTolerancia();
+          $("#minMarcaEdit").val("");
+        }
+      });
+    });
+    // Manejar creación de cookie
+    $("#btnCrear").click(function () {
+      Cookies.set("habilitado", "si", { expires: 36500, path: "/" });
+      $("#alertaCreacion").fadeIn();
+      setTimeout(function () {
+        $("#alertaCreacion").fadeOut(2000);
+      }, 2000);
+    });
+
+    // Manejar eliminación de cookie
+    $("#btnQuitar").click(function () {
+      Cookies.remove("habilitado", { path: "/" });
+      $("#alertaEliminacion").fadeIn();
+      setTimeout(function () {
+        $("#alertaEliminacion").fadeOut(2000);
+      }, 2000);
+    });
+
+    // Cargar estado inicial del limitador de horario
+    function cargarEstadoLimitacion() {
+      $.ajax({
+        type: "GET",
+        url: "asistenciaparametros",
+        data: { id: 2 }, // ID 2 para limitación de horario
+        success: function (response) {
+          if (response && response.status === "success") {
+            // Opción 0 = Sin validaciones (ON)
+            // Opción 1 = Con validaciones (OFF)
+            const estado = parseInt(response.valor) === 1;
+            actualizarBotonLimitacion(estado);
+          }
+        },
+        error: function (xhr) {
+          console.error("Error al cargar estado de limitación:", xhr.responseText);
+        }
+      });
+    }
+
+    // Actualizar apariencia del botón
+    function actualizarBotonLimitacion(activo) {
+      const $boton = $('#toggleLimitacion');
+      if (activo) {
+        $boton.addClass('active');
+        $boton.find('.toggle-icon').text('ON');
+        $boton.removeClass('btn-secondary').addClass('btn-primary');
+      } else {
+        $boton.removeClass('active');
+        $boton.find('.toggle-icon').text('OFF');
+        $boton.removeClass('btn-primary').addClass('btn-secondary');
+      }
+    }
+
+    // Manejar clic en el botón de limitación
+    $('#toggleLimitacion').click(function () {
+      const $boton = $(this);
+      const activoActual = $boton.hasClass('active');
+      const nuevoEstado = !activoActual;
+      const valor = nuevoEstado ? 1 : 0;
+
+      $.ajax({
+        type: "PUT",
+        url: "asistenciaparametros",
+        contentType: "application/json",
+        data: JSON.stringify({
+          id: 2, // ID 2 para limitación de horario
+          minutos: valor.toString() // Usamos el mismo campo que en minutos
+        }),
+        success: function (response) {
+          if (response && response.status === "success") {
+            actualizarBotonLimitacion(nuevoEstado);
+            mostrarAlerta(response.message || "Configuración actualizada", "success");
+          } else {
+            mostrarAlerta(response?.message || "Error al actualizar", "error");
+            // Revertir visualmente si falla
+            actualizarBotonLimitacion(activoActual);
+          }
+        },
+        error: function (xhr) {
+          mostrarAlerta("Error de conexión", "error");
+          // Revertir visualmente si falla
+          actualizarBotonLimitacion(activoActual);
+        }
+      });
+    });
+
+    // Cargar estado inicial al iniciar
+    cargarEstadoLimitacion();
+
+  });
+</script>
