@@ -85,169 +85,19 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 <script>
-  $(document).ready(function () {
-    let endpoint="http://181.224.248.20/GestorFarmacia/"
-    // Función para cargar y mostrar los minutos de tolerancia
-    function cargarMinutosTolerancia() {
-      $.ajax({
-        type: "GET",
-        url: endpoint+"asistenciaparametros",
-        data: { id: 1 }, // Usamos id=1 para los minutos de tolerancia
-        success: function (response) {
-          if (response.status === "success") {
-            const minutos = response.valor;
-            $("#minMarca").text(minutos);
-            $("#minMarcaEdit").val(minutos);
-          } else {
-            console.error("Error al cargar minutos:", response.message);
-            $("#minMarca").text("Error al cargar");
-          }
-        },
-        error: function (xhr) {
-          console.error("Error en la solicitud:", xhr.responseText);
-          $("#minMarca").text("Error de conexión");
-        }
-      });
-    }
-
-    // Llamar a la función al cargar la página
-    cargarMinutosTolerancia();
-
-    // Función para mostrar notificaciones
-    function mostrarAlerta(mensaje, icono) {
-      Swal.fire({
-        toast: true,
-        position: "top-end",
-        icon: icono,
-        title: mensaje,
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        customClass: { popup: "swal2-sm" },
-      });
-    }
-
-    // Manejar edición de minutos
-    $("#editMin").click(function () {
-      const minutos = $("#minMarcaEdit").val();
-      // Validación mejorada
-      if (!minutos || !/^\d+$/.test(minutos)) {
-        mostrarAlerta("Ingrese un valor numérico entero válido", "error");
-        return;
-      }
-
-      $.ajax({
-        type: "PUT",
-        url: endpoint+"asistenciaparametros",
-        contentType: "application/json",
-        dataType: "json", // Esperamos JSON en la respuesta
-        data: JSON.stringify({
-          id: 1,
-          minutos: minutos // Cambié 'valor' a 'minutos' para coincidir con tu servlet
-        }),
-        success: function (response) {
-          if (response && response.status === "success") {
-            mostrarAlerta(response.message || "Actualización exitosa", "success");
-            cargarMinutosTolerancia();
-            $("#minMarcaEdit").val("");
-          } else {
-            mostrarAlerta(response?.message || "Error desconocido", "error");
-          }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          mostrarAlerta(response.message || "Actualización exitosa", "success");
-          cargarMinutosTolerancia();
-          $("#minMarcaEdit").val("");
-        }
-      });
-    });
-    // Manejar creación de cookie
-    $("#btnCrear").click(function () {
+  document.getElementById("btnCrear").addEventListener("click", function () {
+    console.log("clic btnCrear");
       Cookies.set("habilitado", "si", { expires: 36500, path: "/" });
-      $("#alertaCreacion").fadeIn();
-      setTimeout(function () {
-        $("#alertaCreacion").fadeOut(2000);
-      }, 2000);
+      const alerta = document.getElementById("alertaCreacion");
+      alerta.style.display = "block";
+      setTimeout(() => alerta.style.display = "none", 2000);
     });
 
-    // Manejar eliminación de cookie
-    $("#btnQuitar").click(function () {
+    document.getElementById("btnQuitar").addEventListener("click", function () {
+      console.log("clic btnQuitar");
       Cookies.remove("habilitado", { path: "/" });
-      $("#alertaEliminacion").fadeIn();
-      setTimeout(function () {
-        $("#alertaEliminacion").fadeOut(2000);
-      }, 2000);
+      const alerta = document.getElementById("alertaEliminacion");
+      alerta.style.display = "block";
+      setTimeout(() => alerta.style.display = "none", 2000);
     });
-
-    // Cargar estado inicial del limitador de horario
-    function cargarEstadoLimitacion() {
-      $.ajax({
-        type: "GET",
-        url: endpoint+"asistenciaparametros",
-        data: { id: 2 }, // ID 2 para limitación de horario
-        success: function (response) {
-          if (response && response.status === "success") {
-            // Opción 0 = Sin validaciones (ON)
-            // Opción 1 = Con validaciones (OFF)
-            const estado = parseInt(response.valor) === 1;
-            actualizarBotonLimitacion(estado);
-          }
-        },
-        error: function (xhr) {
-          console.error("Error al cargar estado de limitación:", xhr.responseText);
-        }
-      });
-    }
-
-    // Actualizar apariencia del botón
-    function actualizarBotonLimitacion(activo) {
-      const $boton = $('#toggleLimitacion');
-      if (activo) {
-        $boton.addClass('active');
-        $boton.find('.toggle-icon').text('ON');
-        $boton.removeClass('btn-secondary').addClass('btn-primary');
-      } else {
-        $boton.removeClass('active');
-        $boton.find('.toggle-icon').text('OFF');
-        $boton.removeClass('btn-primary').addClass('btn-secondary');
-      }
-    }
-
-    // Manejar clic en el botón de limitación
-    $('#toggleLimitacion').click(function () {
-      const $boton = $(this);
-      const activoActual = $boton.hasClass('active');
-      const nuevoEstado = !activoActual;
-      const valor = nuevoEstado ? 1 : 0;
-
-      $.ajax({
-        type: "PUT",
-        url: endpoint+"asistenciaparametros",
-        contentType: "application/json",
-        data: JSON.stringify({
-          id: 2, // ID 2 para limitación de horario
-          minutos: valor.toString() // Usamos el mismo campo que en minutos
-        }),
-        success: function (response) {
-          if (response && response.status === "success") {
-            actualizarBotonLimitacion(nuevoEstado);
-            mostrarAlerta(response.message || "Configuración actualizada", "success");
-          } else {
-            mostrarAlerta(response?.message || "Error al actualizar", "error");
-            // Revertir visualmente si falla
-            actualizarBotonLimitacion(activoActual);
-          }
-        },
-        error: function (xhr) {
-          mostrarAlerta("Error de conexión", "error");
-          // Revertir visualmente si falla
-          actualizarBotonLimitacion(activoActual);
-        }
-      });
-    });
-
-    // Cargar estado inicial al iniciar
-    cargarEstadoLimitacion();
-
-  });
 </script>
