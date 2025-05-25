@@ -179,7 +179,7 @@
 
     async function cargarTiposDoc() {
         try {
-            const response = await fetch("tipodocumentoservlet");
+            const response = await fetch(endpoint+"tipodocumentoservlet");
             const data = await response.json();
             const combo = document.getElementById("tipoDocCombo");
             combo.innerHTML = "";
